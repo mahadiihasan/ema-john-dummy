@@ -4,6 +4,8 @@
     height: 510px;
     border: 1px solid #95a0a7;
     border-radius: 8px;
+    position: relative;
+    /* for button parent is relative */
 }
 
 .product img{
@@ -12,7 +14,7 @@
     height: 286px;
     margin: 7px;
     border-radius: 8px;
-
+    
 }
 
 .product-name{
@@ -28,5 +30,24 @@
 
 .product-info{
 
-    padding: 14px;
+    margin: 10px;
+    font-size: small;
+    font-weight: 500;
+}
+
+.btn-cart{
+
+    width: 100%;
+    background: #ffe0b3;
+    border: 1px solid #95a0a7;
+    border-radius: 0px 0px 8px 8px;
+    position: absolute;
+    bottom: 0;
+    /* for child button position absolute and botton should be 0 */
+
+}
+
+.btn-cart:hover{
+
+    background-color: orange;
 }
