@@ -4,6 +4,7 @@ import './shop.css'
 import Product from '../Product/Product';
 import Cart from '../Cart/Cart';
 import { addToDb, deleteShoppingCart, getShoppingCart } from '../../../utilities/fakedb';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
 
@@ -12,50 +13,50 @@ const Shop = () => {
     //step 4: add product to cart
     const [cart, setCart] = useState([]);
 
-    useEffect( () => {
+    useEffect(() => {
         fetch('products.json')
-        .then(response => response.json())
-        .then(data => setProducts(data))
-    },[])
+            .then(response => response.json())
+            .then(data => setProducts(data))
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         // console.log('after dependency', products);
         const storedCart = getShoppingCart();
         //array to save cart products
         const savedCart = [];
         // console.log(storedCart);
         //step 1: get id
-        for(const id in storedCart){
+        for (const id in storedCart) {
             // console.log(id);
             //step 2: get the saved product by using id
             const addedProduct = products.find(product => product.id === id)
             // console.log(addedProduct);
             //step 3: quantity of the product
-            if(addedProduct){
+            if (addedProduct) {
                 const quantity = storedCart[id];
                 addedProduct.quantity = quantity;
                 //step 4: 
                 savedCart.push(addedProduct);
-            }        
-            
+            }
+
             // console.log(addedProduct);        
-            
+
         }
         //step 5: set cart with savedCart
         setCart(savedCart);
         console.log(savedCart);
 
-    },[products])
+    }, [products])
 
 
-    const handleAddToCart = (product)=>{
+    const handleAddToCart = (product) => {
         //create new cart
         const newCart = [...cart, product];
         setCart(newCart);
         addToDb(product.id);
     }
 
-    const handleClearCart =()=>{
+    const handleClearCart = () => {
         setCart([]);
         deleteShoppingCart();
     }
@@ -71,7 +72,11 @@ const Shop = () => {
 
             </div>
             <div className="cart-container">
-                <Cart cart={cart} handleClearCart={handleClearCart}></Cart>
+                <Cart cart={cart} handleClearCart={handleClearCart}>
+                    <Link to='/orders'>
+                        <button className='btn-proceed'>Review Order</button>
+                    </Link>
+                </Cart>
             </div>
         </div>
     );
