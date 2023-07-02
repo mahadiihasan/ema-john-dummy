@@ -10,7 +10,7 @@ const Orders = () => {
     const savedCart = useLoaderData();
 
     const [cart, setCart] = useState(savedCart);
-    // console.log(products)
+    // console.log(products);
 
     const handleRemoveFromCart =(id)=>{
         // console.log(id);
